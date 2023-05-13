@@ -1,5 +1,8 @@
 require("dotenv").config();
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger_output.json');
+
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
@@ -39,6 +42,7 @@ app.use("/api", productRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", paymentBRoutes);
 
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 // Port
 const port = process.env.PORT || 8000;
 
